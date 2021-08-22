@@ -545,7 +545,7 @@ const notes = [
     [17, 8, 13, 16], // classe 4
     [13, 7, 15, 11]  // classe 5
   ]
-let average 
+
 
 for (let i = 0 ; i <  notes.length ; i++) { 
     let average = 0
@@ -697,3 +697,161 @@ if ((day >= 21 && month === 8 ) || (day <= 21 && month === 9)) {
     revolutionnary = 'Jours supplémentaires'
 }
 console.log(revolutionnary)
+
+
+// LEs enregistrements 
+
+const user = {
+    firstName = 'Jean' , 
+    lastName = 'Dupont' 
+}
+
+console.log("Bonjour", user.firstName, user.lastName)
+
+
+// Boucles et enregistrements 
+
+const book = { 
+    title : 'Aux sources de l\'utopie ' , 
+    year : 2022 , 
+    author : 'Fred Turner'
+}
+
+for (const [comp, value] of Object.entries(book)) { 
+    console.log(comp , ':' , value)
+}
+
+// Deuxieme manière avec une seule composante et l'index de sa valeur 
+
+for (const arr of Object.entries(book)) { 
+    console.log(arr[0] , ':' , arr[1] )
+}
+
+// Avec for in 
+
+for ( const comp in book ) { 
+    console.log(comp , book[comp])
+}
+
+// Exercice boucles et enregistrements 
+
+const user = {
+    pseudo: 'Dupont',
+    birthYear: 1990,
+    birthMonth: 12,
+    birthDar: 12
+  }
+
+for ( const [profile , value] of Object.entries(user)) { 
+    console.log(profile , ':' , value)
+}
+
+for ( const profile in user) { 
+    console.log(profile , ':' , user[profile])
+}
+
+// Imbriquer des enregistrements 
+const camus = { 
+    name : 'Albert Camus' , 
+    birth : 1913
+}
+const books = [
+{ 
+    title : 'La peste' , 
+    year : '1947' , 
+    author : camus , 
+}, 
+
+{
+   title :  'L\'étrangé' ,
+   year : '1943' , 
+   author : camus
+} ,
+
+{ 
+    title : 'LeProfanateur' , 
+    year : '1954' , 
+    author : { 
+        name : 'Philipe K Dick', 
+        birth : '1920'
+    } 
+} , 
+{ 
+    title : 'Je suis une légende' , 
+    year : '1954' , 
+    author : { 
+        name : 'Richard Matheson', 
+        birth : '1910'
+    } 
+}
+]
+for (const book of books) { 
+    console.log(book.author.name)
+}
+
+// Exercice imbrication 
+
+const employees = [
+    { firstName: 'John', lastName: 'Doe', age: 25, job: 'ingénieur' },
+    { firstName: 'Bob', lastName: 'Smith', age: 38, job: 'chercheur' },
+    { firstName: 'Jeanne', lastName: 'Smith', age: 40, job: 'ingénieur' },
+    { firstName: 'Mathieu', lastName: 'Simpson', age: 59, job: 'secrétaire' },
+    { firstName: 'Constance', lastName: 'Martin', age: 40, job: 'directeur' },
+    { firstName: 'Robert', lastName: 'Peter', age: 30, job: 'ingénieur' },
+    { firstName: 'Richard', lastName: 'Stallman', age: 67, job: 'chercheur' }
+  ]
+
+let sum = 0 
+let counter = 0 
+
+for (const employee of employees) { 
+    if (employee.job === 'ingénieur') { 
+        sum = 0 + employee.age
+        counter++ 
+    } 
+}
+const average = sum / counter 
+
+// Exercice objects et autres structures complèxes 
+
+class User {
+    constructor () {
+      this.lastName = '' , 
+      this.firstName = ''  , 
+      this.age = 0
+    }
+   
+  }
+  
+  const jean = new User()
+  jean.lastName = 'Dupont'
+  jean.firstName = 'Jean'
+  jean.age = 28
+  
+  console.log('Bonjour', jean.firstName, jean.lastName)
+
+// Defi 
+
+class Item { 
+    constructor () { 
+        this.name = ''
+        this.price = 0 
+    }
+}
+let otherItem = true
+const listItem = []
+while (otherItem) {
+    const item = new Item()
+  const nameItem = prompt('Donner le nom du produit')
+  const priceItem = Number(prompt('Donner le prix du produit'))
+  listItem.push(item); 
+
+  otherItem = (prompt('Autre produit? O ou N?') === 'O')
+}
+
+let sum = 0
+for (const item of listItem) { 
+    sum = sum + item.price
+}
+
+console.log(sum)
