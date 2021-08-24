@@ -855,3 +855,335 @@ for (const item of listItem) {
 }
 
 console.log(sum)
+
+
+// Exercice fonctions 
+
+
+function choice () { 
+    let choice = ['Pierre', 'Feuille', 'Ciseaux']
+    let index = Math.floor(Math.random() * choice.length)
+    console.log(choice[index])
+}
+console.log('Une petite partie?')
+choice() ; 
+console.log('Une autre?')
+choice(); 
+console.log('Une dernière!')
+choice();
+
+// retourner le maximum 
+
+function maxList (localList) { 
+    let max = localList[0]
+    for (let i = 0 ; i < localList.length ; i++) { 
+        if (max < localList[i]) { 
+            max = localList[i]
+        }
+    }
+    return max
+}
+
+console.log(maxList([2, 5, 10, 3]))
+
+
+// Exercice 2 fonctions 
+
+function finalPrice (htPriceList) { 
+    const ttcPricesList = []
+    for (let i = 0 ; i < htPriceList.length ; i++) { 
+        const ttcPrices = htPriceList[i] * 1.2
+        ttcPricesList.push(ttcPrices)
+    }
+    return ttcPricesList
+}
+console.log(finalPrice([3, 5, 15]))
+
+
+
+
+
+// La portée de variables et effets de bord 
+// Code ayant un problème avec la portée de ses variables 
+function maxList (localList) {
+    max = localList[0]
+    for (let i = 0 ; i < localList.length ; i++) { 
+        if (max < localList[i]) { 
+            max = localList[i] 
+        }
+    }
+    return max ; 
+}
+// On cherche un maximum dans une liste d'entiers positifs
+const listCeption = [
+    [115 ,5 ,115] ,
+    [15, 15 , 199] , 
+    [12 , 11 , 320]
+]
+
+let max = 0 
+
+for (let i = 0 ; i < listCeption.length ; i++) { 
+    let temp = maxList(listCeption[i])
+    if ( max < temp) { 
+        max = temp
+    }
+}
+
+
+// Correction du code sans effet de bord 
+// Avec let on déclare une variable locale a la fonction 
+
+
+function maxList(localList) { 
+    let max = localList[0]
+    for (let i = 0 ; i < localList.length ; i++) { 
+        if(max < localList[i]) { 
+            max = localList[i]
+        }
+    }
+    return max ; 
+}
+
+const listCeption = [ 
+    [115 ,5 ,115], 
+    [15, 15 , 199] , 
+    [12 , 11 , 32]
+]
+
+
+let max = 0 
+
+for (let i = 0 ; i < listCeption.length ; i++) { 
+    const temp = maxList(listCeption[i])
+    if (max < temp) { 
+        max = temp 
+    }
+}
+console.log(max)
+
+// Exercice 3 portée
+
+function htToTtc (htPrice) {
+    let priceToPay = 1.2 * htPrice
+    return priceToPay
+  }
+  
+  const htPrice = [10, 20, 5]
+  
+  let priceToPay = 0
+  for (let i = 0; i < prices.length; i++) {
+    const currentPrice = htToTtc(prices[i])
+    priceToPay = priceToPay + currentPrice
+  }
+  
+  console.log('Vous devez payer ', priceToPay)
+
+// Cast de variable fonctions implémentée , une liste de charactères ce transforme en liste d'entiens triéé
+// Important a savoir implémenter soi même !!!!!!!!!!!!
+
+const priceList = ['12.3' , '1.2' , '2.50' , '15.4']
+const newList = []
+
+for (let i = 0 ; i < priceList.length ; i++) {
+    newList.push(Number(priceList[i]))
+}
+newList.sort((a, b) => a - b)
+console.log(newList)
+
+// Function prompt()
+ 
+
+let user = prompt('Entrez votre date de naissance : (AAAA-MM-DD')
+console.log('Vous êtes né le :' , user)
+
+// Convertir des types 
+
+
+let swarfs = 7 
+let rainbow = swarfs
+rainbow = rainbow + 1 
+console.log(rainbow === swarfs)
+//faux 
+
+
+// Vrai 
+
+const arr = [4 , 'Référence']
+const arrRef = arr 
+arrRef[0] = arrRef[0] + 1 
+console.log(arr, arrRef)
+console.log(arr === arrRef)
+
+
+
+
+
+
+
+// Copie d'une variable récursive en JS 
+
+const deepCopyFunction =  (inObject) => { 
+    let outObject , value , key 
+    if (typeof inObject !== "object" || inObject === null) { 
+        // Retourne la valeur de inObject si ce n'est pas un objet 
+        return inObject
+    }
+    
+    // Crée un tableau ou un objet pour  contenir les valeurs 
+    
+    outObject = Array.isArray(inObject) ? [] : {} 
+    for (key in inObject) { 
+        value = inObject[key]
+        
+        // Copie récursivement les objets imbriqués , donc les tableaux 
+        
+        outObject[key] = deepCopyFunction(value)
+    }
+    return outObject
+}
+
+const cours = { 
+    'id_cours' : 1337 , 
+    'nom_cours' : 'IngDoc' , 
+    'theme' : 'Ingénieurie Documentaire' , 
+    'etudiants' : [ 
+        {
+            'nom' : 'Norris' , 
+            'prenom' : 'Chuck' , 
+            'age' : 73 , 
+            'country' : 'USA'
+        } , 
+        {
+            'nom' : 'Doe' ,
+            'prenom' : 'John', 
+            'age' : 23 , 
+            'country':  'France' 
+
+        }
+    ]
+}
+
+const copie_cours = deepCopyFunction(cours)
+cours.etudiants[0].id_cours = 1987
+console.log(cours , copie_cours)
+
+// Exercic copie 
+
+
+const basket = {
+    'Le Tour du monde en quatre-vingts jours': 53.90,
+    'Les Misérables': 12.90,
+    'À la recherche du temps perdu': 34.90
+  }
+  
+  const secondBasket = basket
+  const thirdBasket = Object.assign({}, basket)
+  secondBasket['Le Tour du monde en quatre-vingts jours'] = 12.00
+  thirdBasket['À la recherche du temps perdu'] = 31.12
+  const fourthBasket = secondBasket
+  fourthBasket['Les Misérables'] = 7.90
+
+console.log(thirdBasket)
+console.log(secondBasket)
+
+//  Explication du lien entre paramètre et référence
+
+function upperFirstElement(arr) { 
+    arr[0] = arr[0].toUpperCase()
+}
+
+function increment(num) { 
+    num = num + 1
+}
+let pi = 3.14
+const colors = ['Blue' , 'Orange' , 'Yellow']
+
+let piBackup = pi 
+const colorsBackup = colors
+// En appelant les fonction le tableau est modifié(type complexe ) mais pas la var pi 
+//La fonction uperFirstElement modifie le corps de mon programme mais la fait une copie de la référence de la  function increment
+// Et donc ne la modifie pas car le programme ne fait pas référence a ce paramètre passé a la fonction 
+upperFirstElement(colors)
+increment(pi)
+console.log(colors)
+console.log(pi)
+
+// Dans ce cas ci les deux seront modifiés
+
+pi = pi + 1 
+colors[0] = 'Green'
+console.log(pi,piBackup)
+console.log(colors , colorsBackup)
+
+
+// Exercice copie par référence
+
+
+function changeIdentity (age, names) {
+    age = age + 12
+    // Suppression des valeurs existantes
+    names.splice(0, names.length)
+    // Ajout de nouvelles valeurs
+    names.push('John')
+    names.push('Albert')
+    names.push('Smith')
+    console.log(age , names)
+}
+
+  let age = 23
+  let names = ['Luke', 'George', 'Simpsons']
+  changeIdentity(age, names)
+
+
+//   Formatage de Farenheit a Celsius 
+
+let startTempF = 10
+let nTemperatures = 10 
+let scale = 40 
+
+function fahrenheitToCelsius (temperatureF) { 
+    // Conversion de la valeur de farenheit a celcius 
+    const temperatureC = (temperatureF - 32) * 5 / 9 
+    console.log(temperatureF , '°F est équivalent a :' , temperatureC , '°C')
+}
+
+let temperature = startTempF
+let countTemperature = 0 
+
+while (countTemperature !== nTemperatures) { 
+    console.log('countTemperature = ' , countTemperature)
+    console.log('nTemperature =' , nTemperatures)
+    console.log()
+     fahrenheitToCelsius(temperature)
+    countTemperature = countTemperature + 1
+    temperature = temperature + scale
+}
+
+// Exeercice  
+
+var result = 'x '
+for (let i = 0; i < 11; i++) {
+  for (let j = 0; j < 11; j++) {
+    if (i === 0 && j > 0) {
+      // Formattage pour l'en-tête
+      result = result + '[' + j + ']'
+    } 
+    if (j === 0 && i > 0) {
+      // Formattage pour la première colonne
+      result = result + '[' + i + '] '
+    } 
+    if (i > 0 && j > 0) {
+      // Intérieur du tableau
+      result = result + (i * j) + ' '
+    }
+    result = result + '\t'
+  }
+  result = result + '\n'
+}
+
+console.log(result)
+
+
+// Exercice déboguer 
+
